@@ -31,6 +31,15 @@ public class ProdutoServiceTest extends ScenarioTest<ProdutoGivenStage, ProdutoW
     void deve_filtrar_por_tipo_de_produto(TypeProduto typeProduto, int qntProdutosEsperada){
         given().um_catalago_padrao();
         when().busco_por_tipo_produto(typeProduto);
-        then().a_quantidade_produtos_deve_ser(qntProdutosEsperada).o_produto_deve_ter_tipo(typeProduto);
+        then()
+            .a_quantidade_produtos_deve_ser(qntProdutosEsperada)
+            .o_produto_deve_ter_tipo(typeProduto);
+    }
+
+    @Test
+    void deve_filtrar_produto_com_maior_quantidade(){
+        given().um_catalago_padrao();
+        when().busco_produto_com_maior_quantidade();
+        then().o_produto_deve_ter_quantidade(3);
     }
 }

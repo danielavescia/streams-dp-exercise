@@ -44,9 +44,17 @@ public class ProdutoThenStage extends Stage<ProdutoThenStage>{
         assert p.getNomeProduto().equals(produtoEsperado.getNomeProduto()): "Nome Esperado: " + produtoEsperado.getNomeProduto() + "nome obtido: " + p.getNomeProduto();
         return self();
     }
+
     public ProdutoThenStage o_produto_deve_ter_tipo(TypeProduto tipoEsperado){
         assert produtos.stream()
             .allMatch(p -> p.getTipoProduto()  == tipoEsperado): "Tipo Esperado: " + tipoEsperado;
+        return self();
+    }
+
+     public ProdutoThenStage o_produto_deve_ter_quantidade(int qntEsperada){
+        assert produto.isPresent();
+        Produto p = produto.get();
+        assert p.getQuantidade() == qntEsperada;
         return self();
     }
 }
