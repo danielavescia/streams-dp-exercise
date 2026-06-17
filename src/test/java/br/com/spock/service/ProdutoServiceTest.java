@@ -2,8 +2,9 @@ package br.com.spock.service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import com.tngtech.jgiven.junit5.ScenarioTest;
+import br.com.spock.model.TypeProduto;
 import br.com.spock.stages.ProdutoGivenStage;
 import br.com.spock.stages.ProdutoThenStage;
 import br.com.spock.stages.ProdutoWhenStage;
@@ -18,14 +19,18 @@ public class ProdutoServiceTest extends ScenarioTest<ProdutoGivenStage, ProdutoW
     }
 
     @ParameterizedTest(name = "faixa R${0}-R${1} retorna {2} produto(s)")
-    @CsvSource({
-        "4000.0, 6000.0, 3",
-        "4000.0, 4499.0, 1",
-        "0.0, 3999.0, 0" 
-    })
+    @MethodSource("br.com.spock.dataProvider.ProdutoDataProvider#cenariosPorFaixaPreco")
     void deve_filtrar_por_faixa_de_preco(double precoMin, double precoMax, int qntProdutosEsperada){
         given().um_catalago_padrao();
         when().busco_por_produtos_faixa_preco(precoMin, precoMax);
         then().a_quantidade_produtos_deve_ser(qntProdutosEsperada);
+    }
+
+    @ParameterizedTest(name = "tipo {0} retorna {1} produto(s)")
+    @MethodSource("br.com.spock.dataProvider.ProdutoDataProvider#cenariosPortTipoProduto")
+    void deve_filtrar_por_tipo_de_produto(TypeProduto typeProduto, int qntProdutosEsperada){
+        given().um_catalago_padrao();
+        when().busco_por_tipo_produto(typeProduto);
+        then().a_quantidade_produtos_deve_ser(qntProdutosEsperada).o_produto_deve_ter_tipo(typeProduto);
     }
 }

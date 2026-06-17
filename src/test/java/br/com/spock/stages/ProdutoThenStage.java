@@ -4,6 +4,7 @@ import java.util.List;
 import com.tngtech.jgiven.Stage;
 import com.tngtech.jgiven.annotation.ExpectedScenarioState;
 import br.com.spock.model.Produto;
+import br.com.spock.model.TypeProduto;
 
 public class ProdutoThenStage extends Stage<ProdutoThenStage>{
 
@@ -29,8 +30,18 @@ public class ProdutoThenStage extends Stage<ProdutoThenStage>{
         return self();
     }
 
-    public ProdutoThenStage o_primeiro_produto_deve_ter_preco(Produto produtoEsperado){
+    public ProdutoThenStage produto_deve_ter_preco(Produto produtoEsperado){
         assert produto.getPreco() == produtoEsperado.getPreco(): "Esperado: " + produtoEsperado.getPreco() + "produto obtido: " + produto.getPreco();
+        return self();
+    }
+
+    public ProdutoThenStage o_produto_deve_ter_nome(Produto produtoEsperado){
+        assert produto.getNomeProduto() == produtoEsperado.getNomeProduto(): "Nome Esperado: " + produtoEsperado.getNomeProduto() + "nome obtido: " + produto.getNomeProduto();
+        return self();
+    }
+    public ProdutoThenStage o_produto_deve_ter_tipo(TypeProduto tipoEsperado){
+        assert produtos.stream()
+            .allMatch(p -> p.getTipoProduto()  == tipoEsperado): "Tipo Esperado: " + tipoEsperado + "tipo obtido: " + produto.getTipoProduto();
         return self();
     }
 }
