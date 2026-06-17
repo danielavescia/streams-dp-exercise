@@ -1,6 +1,7 @@
 package br.com.spock.stages;
 
 import java.util.List;
+import java.util.Optional;
 import com.tngtech.jgiven.Stage;
 import com.tngtech.jgiven.annotation.ExpectedScenarioState;
 import com.tngtech.jgiven.annotation.ProvidedScenarioState;
@@ -20,7 +21,7 @@ public class ProdutoWhenStage extends Stage<ProdutoWhenStage> {
     List<Produto> produtos;
 
     @ProvidedScenarioState
-    Produto produto;
+    Optional<Produto> produto;
 
     @ProvidedScenarioState
     List<String> nomes;
@@ -33,7 +34,6 @@ public class ProdutoWhenStage extends Stage<ProdutoWhenStage> {
     public ProdutoWhenStage busco_por_produtos_faixa_preco(double precoMin, double precoMax){
         produtos = produtoService.porFaixadePreço(precoMin, precoMax);
         return self();
-
     }
 
     public ProdutoWhenStage busco_produto_com_maior_quantidade(){

@@ -3,6 +3,7 @@ package br.com.spock.service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
@@ -48,10 +49,9 @@ public class ProdutoService {
                     .collect(Collectors.toList());
     }
 
-    public Produto porMaiorQuantidade() {
+    public Optional<Produto> porMaiorQuantidade() {
         return produtos.stream()
-            .max(Comparator.comparing(Produto::getQuantidade))
-            .orElse(null);
+            .max(Comparator.comparing(Produto::getQuantidade));        
     }
 
     public List<Produto> porFaixadePreço(double precoMinimo, double precoMaximo) {
