@@ -42,4 +42,18 @@ public class ProdutoServiceTest extends ScenarioTest<ProdutoGivenStage, ProdutoW
         when().busco_produto_com_maior_quantidade();
         then().o_produto_deve_ter_quantidade(3);
     }
+
+    @Test
+    void deve_filtrar_por_id_de_produto(){
+        given().um_catalago_padrao();
+        when().busco_por_id_produto("123");
+        then().o_produto_deve_ter_id("123");
+    }
+
+    @Test
+    void deve_retornar_optional_produto_vazio_ao_filtrar_por_id_inexistente(){
+        given().um_catalago_padrao();
+        when().busco_por_id_produto("999");
+        then().deve_retornar_optional_produto_vazio();
+    }
 }

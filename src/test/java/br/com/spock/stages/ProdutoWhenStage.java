@@ -45,4 +45,9 @@ public class ProdutoWhenStage extends Stage<ProdutoWhenStage> {
         produtos = produtoService.porTipo(tipo);
         return self();
     }
+
+    public ProdutoWhenStage busco_por_id_produto(String id) {
+        produto = produtoService.porId(id);
+        return self();
+    }
 }

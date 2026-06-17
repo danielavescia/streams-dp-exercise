@@ -57,4 +57,23 @@ public class ProdutoThenStage extends Stage<ProdutoThenStage>{
         assert p.getQuantidade() == qntEsperada;
         return self();
     }
+
+     public ProdutoThenStage o_produto_deve_ter_id(String id){
+        assert produto.isPresent();
+        Produto p = produto.get();
+        assert p.getId().equals(id);
+        return self();
+    }
+
+    public ProdutoThenStage deve_retornar_lista_produto_vazia(){
+        assert produtos.isEmpty();
+        return self();
+    }
+
+    public ProdutoThenStage deve_retornar_optional_produto_vazio(){
+        assert produto.isEmpty();
+        return self();
+    }
+
+   
 }

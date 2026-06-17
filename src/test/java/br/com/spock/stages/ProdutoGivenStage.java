@@ -13,10 +13,4 @@ public class ProdutoGivenStage extends Stage<ProdutoGivenStage>{
         produtoService = new ProdutoService();
         return self();
     }
-
-    public ProdutoGivenStage um_catalago_vazio(){
-        produtoService = new ProdutoService();
-        produtoService.getProdutos().clear();
-        return self();
-    }
 }
