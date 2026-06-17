@@ -3,6 +3,11 @@ name: CI testing and CD Report
 on:
   push:
     branches: [ "main" ]
+    
+permissions:
+  contents: read
+  pages: write
+  id-token: write
   
 jobs:
   test-and-report:
