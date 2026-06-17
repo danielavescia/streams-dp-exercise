@@ -59,4 +59,10 @@ public class ProdutoService {
                 .filter(p -> p.getPreco() >= precoMinimo && p.getPreco() <= precoMaximo)
                 .collect(Collectors.toList());
     }
+
+    public Optional<Produto> porId(String id){
+        return produtos.stream()
+            .filter(p -> p.getId().equals(id))
+            .findFirst();
+    }
 }
