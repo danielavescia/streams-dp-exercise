@@ -42,7 +42,7 @@ public class Produto {
 	public void setNomeProduto(String nomeProduto) {
 		this.nomeProduto = nomeProduto;
 	}
-	public TypeProduto getProduto() {
+	public TypeProduto getTipoProduto() {
 		return produto;
 	}
 	public void setProduto(TypeProduto produto) {
