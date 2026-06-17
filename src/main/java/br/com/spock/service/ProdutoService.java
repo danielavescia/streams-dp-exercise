@@ -1,6 +1,7 @@
 package br.com.spock.service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -36,8 +37,26 @@ public class ProdutoService {
 				.findFirst()
                 .orElse("");
 		return  produtos.
-				 stream().filter(prod1->prod1.getPreco()>=4500.)
+				 stream().filter(prod1 -> prod1.getPreco()>=4500.)
 				 .map(prod-> nomes.get())
 				 .collect(Collectors.toList());
 	}
+
+    public List<Produto> porTipo(TypeProduto tipo) {
+        return produtos.stream()
+                    .filter(p -> p.getTipoProduto() == tipo)
+                    .collect(Collectors.toList());
+    }
+
+    public Produto porMaiorQuantidade() {
+        return produtos.stream()
+            .max(Comparator.comparing(Produto::getQuantidade))
+            .orElse(null);
+    }
+
+    public List<Produto> porFaixadePreço(double precoMinimo, double precoMaximo) {
+        return produtos.stream()
+                .filter(p -> p.getPreco() >= precoMinimo && p.getPreco() <= precoMaximo)
+                .collect(Collectors.toList());
+    }
 }
