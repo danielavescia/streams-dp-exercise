@@ -61,6 +61,13 @@ public class ProdutoServiceTest extends ScenarioTest<ProdutoGivenStage, ProdutoW
     }
 
     @Test
+    void deve_filtrar_produto_com_menor_quantidade(){
+        given().um_catalago_padrao();
+        when().busco_produto_com_menor_quantidade();
+        then().o_produto_deve_ter_quantidade(1);
+    }
+
+    @Test
     void deve_filtrar_por_id_de_produto(){
         given().um_catalago_padrao();
         when().busco_por_id_produto("123");
@@ -74,9 +81,17 @@ public class ProdutoServiceTest extends ScenarioTest<ProdutoGivenStage, ProdutoW
         then().deve_retornar_optional_produto_vazio();
     }
 
+    @ParameterizedTest(name = "Filtrar por nome {0}, deve retornar o produto com nome{2}")
+    @MethodSource("br.com.spock.dataProvider.ProdutoDataProvider#cenariosPorBuscaNome")
+    void deve_filtrar_por_nome_produto(String nome, Produto esperado){
+        given().um_catalago_padrao();
+        when().busco_por_nome_produto(nome);
+        then().o_produto_deve_ter_nome(esperado);
+    }
+
     @ParameterizedTest(name = "comparação com {0} retorna {2}")
     @MethodSource("br.com.spock.dataProvider.ProdutoDataProvider#cenariosCamposOrdenacaoCrescente")
-    public void deve_ordenador_produtos(Comparator<Produto> comparator, List<String> esperada){
+    void deve_ordenador_produtos(Comparator<Produto> comparator, List<String> esperada){
         given().um_catalago_padrao();
         when().ordeno_por(comparator);
         then().deve_retornar_ordenado_crescente(esperada);

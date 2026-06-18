@@ -97,7 +97,7 @@ public class ProdutoThenStage extends Stage<ProdutoThenStage>{
     }
 
    private Produto getProdutoOuOptional(){
-        assert produto.isPresent();
+        assert produto.isPresent(): "Não foi encontrado produto.";
         return produto.get();
    }
 }

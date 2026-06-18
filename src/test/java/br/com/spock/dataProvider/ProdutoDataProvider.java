@@ -24,6 +24,18 @@ public class ProdutoDataProvider {
          );
     }
 
+     public static Stream<Arguments> cenariosPorBuscaNome(){
+        Produto lenovo = new Produto("123", "micro lenovo", TypeProduto.COMPUTADOR, 4000., 2);
+        Produto hp     = new Produto("456", "micro hp",     TypeProduto.COMPUTADOR, 6000., 2);
+        Produto del   = new Produto("789", "micro del",   TypeProduto.COMPUTADOR, 4500., 3);
+
+    return Stream.of(
+        Arguments.of("micro lenovo", lenovo),
+        Arguments.of("micro hp",     hp),
+        Arguments.of("micro del",   del)
+    );
+    }
+
     public static Stream <Arguments> cenariosCamposOrdenacaoCrescente(){
         return Stream.of(
             //nome

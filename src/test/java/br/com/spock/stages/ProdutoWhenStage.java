@@ -55,6 +55,11 @@ public class ProdutoWhenStage extends Stage<ProdutoWhenStage> {
         return self();
     }
 
+    public ProdutoWhenStage busco_produto_com_menor_quantidade(){
+        produto = produtoService.porMenorQuantidade();
+        return self();
+    }
+
     public ProdutoWhenStage busco_por_tipo_produto(TypeProduto tipo) {
         produtos = produtoService.porTipo(tipo);
         return self();
@@ -62,6 +67,11 @@ public class ProdutoWhenStage extends Stage<ProdutoWhenStage> {
 
     public ProdutoWhenStage busco_por_id_produto(String id) {
         produto = produtoService.porId(id);
+        return self();
+    }
+
+    public ProdutoWhenStage busco_por_nome_produto(String nome) {
+        produto = produtoService.porNome(nome);
         return self();
     }
 
