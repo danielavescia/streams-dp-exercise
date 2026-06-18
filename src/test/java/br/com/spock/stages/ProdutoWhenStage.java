@@ -16,7 +16,10 @@ public class ProdutoWhenStage extends Stage<ProdutoWhenStage> {
     ProdutoService produtoService;
 
     @ProvidedScenarioState
-    Double total;
+    Double resultado;
+
+    @ProvidedScenarioState
+    Integer quantidade;
 
     @ProvidedScenarioState
     List<Produto> produtos;
@@ -28,7 +31,17 @@ public class ProdutoWhenStage extends Stage<ProdutoWhenStage> {
     List<String> nomes;
 
     public ProdutoWhenStage calculo_o_total() {
-        total = produtoService.total();
+        resultado = produtoService.total();
+        return self();
+    }
+
+    public ProdutoWhenStage calculo_a_media(){
+        resultado = produtoService.media();
+        return self();
+    }
+
+     public ProdutoWhenStage calculo_a_quantidade_total(){
+        quantidade = produtoService.quantidadeTotalProdutos();
         return self();
     }
 

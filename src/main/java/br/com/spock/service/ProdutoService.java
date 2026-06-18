@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import br.com.spock.model.Produto;
@@ -35,8 +34,12 @@ public class ProdutoService {
 		return produtos.stream().mapToDouble(produto-> produto.getPreco()).sum();
 	}
 
-	public OptionalDouble media(){
-		return produtos.stream().mapToDouble(produto-> produto.getPreco()).average();
+	public Double media(){
+		return produtos.stream()
+        .mapToDouble(Produto::getPreco).average()
+        .stream().map(avg -> Math.round(avg * 100.0) / 100.0)
+        .findFirst()
+        .orElse(0.0);
 	}
 
 	public Integer quantidadeTotalProdutos(){
@@ -78,7 +81,7 @@ public class ProdutoService {
 			.findFirst();
 	}
 
-	//Ordenação
+	//Ordenação Crescente
 	public List<Produto> ordenarProdutoPorCampo(Comparator<Produto>comparator){
 		return produtos.stream().sorted(comparator)
 		.toList();

@@ -9,7 +9,10 @@ import br.com.spock.model.TypeProduto;
 public class ProdutoThenStage extends Stage<ProdutoThenStage>{
 
     @ExpectedScenarioState
-    protected Double total;
+    Double resultado;
+
+    @ExpectedScenarioState
+    Integer quantidade;
 
     @ExpectedScenarioState
     List<Produto> produtos;
@@ -21,7 +24,17 @@ public class ProdutoThenStage extends Stage<ProdutoThenStage>{
     List<String> nomes;
 
     public ProdutoThenStage o_total_deve_ser(Double esperado){
-        assert total.equals(esperado): "Total esperado: " + esperado + "obtido: " + total;
+        assert resultado.equals(esperado): "Total esperado: " + esperado + "obtido: " + resultado;
+        return self();
+    }
+
+    public ProdutoThenStage a_media_deve_ser(Double esperado){
+        assert resultado.equals(esperado):  "Total esperado: " + esperado + "obtido: " + resultado;
+        return self();
+    }
+
+    public ProdutoThenStage a_quantidade_toal_produtos_deve_ser(Integer esperado){
+        assert quantidade.equals(esperado): "Total de produtos esperado: " + esperado + "obtido: " + resultado;
         return self();
     }
 

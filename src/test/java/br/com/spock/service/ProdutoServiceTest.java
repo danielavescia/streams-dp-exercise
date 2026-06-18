@@ -21,6 +21,20 @@ public class ProdutoServiceTest extends ScenarioTest<ProdutoGivenStage, ProdutoW
         then().o_total_deve_ser(14500.0);
     }
 
+    @Test
+    void deve_calcular_media(){
+        given().um_catalago_padrao();
+        when().calculo_a_media();
+        then().a_media_deve_ser(4833.33);
+    }
+
+    @Test
+    void deve_retornar_quantidade_total_produtos(){
+        given().um_catalago_padrao();
+        when().calculo_a_quantidade_total();
+        then().a_quantidade_toal_produtos_deve_ser(6);
+    }
+
     @ParameterizedTest(name = "faixa R${0}-R${1} retorna {2} produto(s)")
     @MethodSource("br.com.spock.dataProvider.ProdutoDataProvider#cenariosPorFaixaPreco")
     void deve_filtrar_por_faixa_de_preco(double precoMin, double precoMax, int qntProdutosEsperada){
