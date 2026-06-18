@@ -81,9 +81,34 @@ public class ProdutoService {
 			.findFirst();
 	}
 
-	//Ordenação Crescente
-	public List<Produto> ordenarProdutoPorCampo(Comparator<Produto>comparator){
+	public List<Produto> porNomeContendo(String trecho){
+		return produtos.stream()
+			.filter(produto -> produto.getNomeProduto().contains(trecho))
+			.toList();
+	}
+
+	public List<Produto> comQuantidadeAbaixoDe(Integer quantidade){
+		return produtos.stream()
+			.filter(p -> p.getQuantidade() < quantidade)
+			.toList();
+	}
+
+	public List<Produto> comQuantidadeAcimaDe(Integer quantidade){
+		return produtos.stream()
+			.filter(p -> p.getQuantidade() > quantidade)
+			.toList();
+	}
+
+	//Ordenação
+	//Crescente
+	public List<Produto> ordenarProdutoPorCampoCrescente(Comparator<Produto>comparator){
 		return produtos.stream().sorted(comparator)
+		.toList();
+	}
+
+	//Ordenação Decrescente
+	public List<Produto> ordenarProdutoPorCampoDecrescente(Comparator<Produto>comparator){
+		return produtos.stream().sorted(comparator.reversed())
 		.toList();
 	}
 }

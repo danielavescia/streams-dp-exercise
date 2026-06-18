@@ -22,6 +22,9 @@ public class ProdutoWhenStage extends Stage<ProdutoWhenStage> {
     Integer quantidade;
 
     @ProvidedScenarioState
+    String trecho;
+
+    @ProvidedScenarioState
     List<Produto> produtos;
 
     @ProvidedScenarioState
@@ -75,8 +78,28 @@ public class ProdutoWhenStage extends Stage<ProdutoWhenStage> {
         return self();
     }
 
-    public ProdutoWhenStage ordeno_por(Comparator<Produto> comparator) {
-        produtos = produtoService.ordenarProdutoPorCampo(comparator);
+    public ProdutoWhenStage busco_por_quantidade_acima_de(Integer quantidade) {
+        produtos = produtoService.comQuantidadeAcimaDe(quantidade);
+        return self();
+    }
+
+     public ProdutoWhenStage busco_por_quantidade_abaixo_de(Integer quantidade) {
+        produtos = produtoService.comQuantidadeAbaixoDe(quantidade);
+        return self();
+    }
+
+    public ProdutoWhenStage ordeno_por_campo_crescente(Comparator<Produto> comparator) {
+        produtos = produtoService.ordenarProdutoPorCampoCrescente(comparator);
+        return self();
+    }
+
+     public ProdutoWhenStage ordeno_por_campo_decrescente(Comparator<Produto> comparator) {
+        produtos = produtoService.ordenarProdutoPorCampoDecrescente(comparator);
+        return self();
+    }
+
+     public ProdutoWhenStage filtro_nome_por_trecho(String trecho) {
+        produtos = produtoService.porNomeContendo(trecho);
         return self();
     }
 }

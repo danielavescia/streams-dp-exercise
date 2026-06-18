@@ -15,6 +15,9 @@ public class ProdutoThenStage extends Stage<ProdutoThenStage>{
     Integer quantidade;
 
     @ExpectedScenarioState
+    String trecho;
+
+    @ExpectedScenarioState
     List<Produto> produtos;
 
     @ExpectedScenarioState
@@ -73,8 +76,14 @@ public class ProdutoThenStage extends Stage<ProdutoThenStage>{
         return self();
     }
 
+     public ProdutoThenStage produtos_devem_ter_trecho(String trecho){
+        assert produtos.stream()
+            .allMatch(p -> p.getNomeProduto().contains(trecho)): "Nem todos os nomes dos produtos contem "+trecho;
+        return self();
+    }
+
     public ProdutoThenStage deve_retornar_lista_produto_vazia(){
-        assert produtos.isEmpty();
+        assert produtos.isEmpty(): "Lista não esta vazia como esperado";
         return self();
     }
 
@@ -83,7 +92,7 @@ public class ProdutoThenStage extends Stage<ProdutoThenStage>{
         return self();
     }
 
-    public ProdutoThenStage deve_retornar_ordenado_crescente(List<String> nomesEsperados){
+    public ProdutoThenStage deve_retornar_ordenado(List<String> nomesEsperados){
         List<String> nomesObtidos = produtos.stream()
         .map(Produto::getNomeProduto)
         .toList();

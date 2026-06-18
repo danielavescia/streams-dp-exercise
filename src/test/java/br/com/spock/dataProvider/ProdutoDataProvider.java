@@ -59,4 +59,28 @@ public class ProdutoDataProvider {
                 List.of("micro lenovo", "micro hp", "micro del"))
             );     
     }
+
+    public static Stream <Arguments> cenariosCamposOrdenacaoDecrescente(){
+        return Stream.of(
+            //nome
+            Arguments.of(
+                Comparator.comparing(Produto::getNomeProduto), 
+                List.of("micro lenovo", "micro hp", "micro del")),
+
+            //preco    
+            Arguments.of(
+                Comparator.comparing(Produto::getPreco), 
+                List.of("micro hp", "micro del", "micro lenovo")),
+
+            //quantidade
+                Arguments.of(
+                Comparator.comparing(Produto::getQuantidade), 
+                List.of("micro del", "micro hp", "micro lenovo")),
+
+            //id
+            Arguments.of(
+                Comparator.comparing(Produto::getId), 
+                 List.of("micro del", "micro hp", "micro lenovo"))
+            );     
+    } 
 }
