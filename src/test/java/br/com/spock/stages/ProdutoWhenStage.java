@@ -1,5 +1,6 @@
 package br.com.spock.stages;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import com.tngtech.jgiven.Stage;
@@ -48,6 +49,11 @@ public class ProdutoWhenStage extends Stage<ProdutoWhenStage> {
 
     public ProdutoWhenStage busco_por_id_produto(String id) {
         produto = produtoService.porId(id);
+        return self();
+    }
+
+    public ProdutoWhenStage ordeno_por(Comparator<Produto> comparator) {
+        produtos = produtoService.ordenarProdutoPorCampo(comparator);
         return self();
     }
 }

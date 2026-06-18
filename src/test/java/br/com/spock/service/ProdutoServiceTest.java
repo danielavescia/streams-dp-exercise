@@ -1,9 +1,12 @@
 package br.com.spock.service;
 
+import java.util.Comparator;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import com.tngtech.jgiven.junit5.ScenarioTest;
+import br.com.spock.model.Produto;
 import br.com.spock.model.TypeProduto;
 import br.com.spock.stages.ProdutoGivenStage;
 import br.com.spock.stages.ProdutoThenStage;
@@ -55,5 +58,13 @@ public class ProdutoServiceTest extends ScenarioTest<ProdutoGivenStage, ProdutoW
         given().um_catalago_padrao();
         when().busco_por_id_produto("999");
         then().deve_retornar_optional_produto_vazio();
+    }
+
+    @ParameterizedTest(name = "comparação com {0} retorna {2}")
+    @MethodSource("br.com.spock.dataProvider.ProdutoDataProvider#cenariosCamposOrdenacaoCrescente")
+    public void deve_ordenador_produtos(Comparator<Produto> comparator, List<String> esperada){
+        given().um_catalago_padrao();
+        when().ordeno_por(comparator);
+        then().deve_retornar_ordenado_crescente(esperada);
     }
 }

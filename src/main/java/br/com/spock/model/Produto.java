@@ -10,8 +10,6 @@ public class Produto {
 	private Double preco;
 	private Integer quantidade;
 	
-	
-	
 	public Produto(String id, String nomeProduto, TypeProduto produto, Double preco, Integer quantidade) {
 		super();
 		this.id = id;
@@ -30,6 +28,7 @@ public class Produto {
 		return "Produto [id=" + id + ", nomeProduto=" + nomeProduto + ", produto=" + produto + ", preco=" + preco
 				+ ", quantidade=" + quantidade + "]";
 	}
+
 	public String getId() {
 		return id;
 	}
