@@ -66,7 +66,7 @@ public class ProdutoThenStage extends Stage<ProdutoThenStage>{
 
      public ProdutoThenStage o_produto_deve_ter_quantidade(int qntEsperada){
         Produto p = getProdutoOuOptional();
-        assert p.getQuantidade() == qntEsperada;
+        assert p.getQuantidade() == qntEsperada: "Esperado: " + qntEsperada + " obtido: " + p.getQuantidade();
         return self();
     }
 
